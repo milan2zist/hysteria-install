@@ -1,20 +1,20 @@
-# [Hysteria 2](https://github.com/apernet/hysteria/tree/wip-hy2) 安装指南
+# [Hysteria 2](https://github.com/apernet/hysteria/tree/wip-hy2) Installation guide
 
-## 服务端
+## Server
 
-### 安装
+### Install
 
-1. [下载程序](https://github.com/apernet/hysteria/actions/workflows/dev-build-hy2.yml)
+1. [Download program](https://github.com/apernet/hysteria/actions/workflows/dev-build-hy2.yml)
 
-- 将 **hysteria-linux-amd64** 改名为 **hysteria**，将它上传到 **/usr/local/bin** 目录，执行下面的命令
+- will **hysteria-linux-amd64** 改名为 **hysteria**，upload it to **/usr/local/bin** 目录，执行下面的命令
 
 ```
 chmod +x /usr/local/bin/hysteria
 ```
 
-- [编译程序](https://github.com/chika0801/hysteria-install/blob/main/compile_hysteria.md)
+- [Compile program](https://github.com/chika0801/hysteria-install/blob/main/compile_hysteria.md)
 
-2. 下载配置
+2. Download Configuration
 
 ```
 curl -Lo /root/hysteria_config.yaml https://raw.githubusercontent.com/chika0801/hysteria-install/main/config_server.yaml
