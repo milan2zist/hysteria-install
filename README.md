@@ -1,51 +1,51 @@
-# [Hysteria 2](https://github.com/apernet/hysteria/tree/wip-hy2) 安装指南
+# [Hysteria 2](https://github.com/apernet/hysteria/tree/wip-hy2) Installation guide
 
-## 服务端
+## Server side
 
-### 安装
+### install
 
-1. [下载程序](https://github.com/apernet/hysteria/actions/workflows/dev-build-hy2.yml)
+1. [Download program](https://github.com/apernet/hysteria/actions/workflows/dev-build-hy2.yml)
 
-- 将 **hysteria-linux-amd64** 改名为 **hysteria**，将它上传到 **/usr/local/bin** 目录，执行下面的命令
+- 将 **hysteria-linux-amd64** Changed its name to **hysteria**，Upload it to **/usr/local/bin** Table of contents，Execute the following command
 
 ```
 chmod +x /usr/local/bin/hysteria
 ```
 
-- [编译程序](https://github.com/chika0801/hysteria-install/blob/main/compile_hysteria.md)
+- [Compile the program](https://github.com/chika0801/hysteria-install/blob/main/compile_hysteria.md)
 
-2. 下载配置
+2. Download configuration
 
 ```
 curl -Lo /root/hysteria_config.yaml https://raw.githubusercontent.com/chika0801/hysteria-install/main/config_server.yaml
 ```
 
-3. 下载systemctl配置
+3. Download systemd configuration
 
 ```
 curl -Lo /etc/systemd/system/hysteria.service https://raw.githubusercontent.com/chika0801/hysteria-install/main/hysteria.service && systemctl daemon-reload
 ```
 
-4. 上传证书和私钥
+4. Upload certificate and private key
 
-- 将证书文件改名为 **fullchain.cer**，将私钥文件改名为 **private.key**，将它们上传到 **/root** 目录
+- Rename the certificate file to  **fullchain.cer**，Rename the private key file to **private.key**，Upload them to **/root** Table of contents
 
-5. 启动程序
+5. Start the program
 
 ```
 systemctl enable --now hysteria
 ```
 
-| 项目 | |
+| project | |
 | :--- | :--- |
-| 程序 | **/usr/local/bin/hysteria** |
-| 配置 | **/root/hysteria_config.yaml** |
-| 重启 | `systemctl restart hysteria` |
-| 状态 | `systemctl status hysteria` |
-| 查看日志 | `journalctl -u hysteria -o cat -e` |
-| 实时日志 | `journalctl -u hysteria -o cat -f` |
+| program | **/usr/local/bin/hysteria** |
+| Placement | **/root/hysteria_config.yaml** |
+| restart | `systemctl restart hysteria` |
+| status | `systemctl status hysteria` |
+| View log | `journalctl -u hysteria -o cat -e` |
+| Real-time log | `journalctl -u hysteria -o cat -f` |
 
-### 卸载
+### uninstall
 
 ```
 systemctl disable --now hysteria && rm -f /usr/local/bin/hysteria /root/hysteria_config.yaml /etc/systemd/system/hysteria.service
@@ -53,29 +53,28 @@ systemctl disable --now hysteria && rm -f /usr/local/bin/hysteria /root/hysteria
 
 ## 客户端
 
-### 由 v2rayN 提供 HTTP SOCKS5 代理，由 v2rayN 提供路由规则
+### by v2rayN provide HTTP SOCKS5 Deputy，by v2rayN provide road by rules
 
-1. 下载Windows客户端程序[hysteria-windows-amd64.exe](https://github.com/apernet/hysteria/actions/workflows/dev-build-hy2.yml)，重命名为hysteria.exe，复制到v2rayN\bin\hysteria文件夹。
-
-2. 下载客户端配置[config_client.yaml](https://github.com/chika0801/hysteria-install/blob/main/config_client.yaml)，修改chika.example.com为证书中包含的域名，修改10.0.0.1为VPS的IP。
+1. Download the Windows client program [hysteria-windows-amd64.exe](https://github.com/apernet/hysteria/actions/workflows/dev-build-hy2.yml)，Rename to hysteria.exe，Copy to v2rayN\bin\hysteria folder.
+2. Download client configuration [config_client.yaml](https://github.com/chika0801/hysteria-install/blob/main/config_client.yaml)，modify chika.example.com Is the domain name contained in the certificate ，修改10.0.0.1为VPS的IP。
 
 3. v2rayN：服务器 ——> 添加自定义配置服务器 ——> 浏览 ——> 选择客户端配置 ——> Core类型 hysteria ——> Socks端口 50000
 
 ![hysteria](https://github.com/chika0801/hysteria-install/assets/88967758/8044c172-7632-48f4-83ea-c711d688929d)
 
-### 由 sing-box 提供 Tun 模式（透明代理），由 sing-box 提供路由规则
+### by sing-box provide Tun mode（Transparent proxy），by sing-box Provide routing rules
 
-1. sing-box：参考[Windows 使用方法](https://github.com/chika0801/sing-box-examples/blob/main/README.md)，将[客户端配置](https://github.com/chika0801/sing-box-examples/blob/main/Tun/config_client_windows.json)进行如下修改。
+1. sing-box：Reference [Windows How to use ](https://github.com/chika0801/sing-box-examples/blob/main/README.md)，Will client configuration](https://github.com/chika0801/sing-box-examples/blob/main/Tun/config_client_windows.json)Make the following changes。
 
 原内容
 ```jsonc
         {
             "tag": "proxy",
-            // 粘贴你的客户端配置，需要保留 "tag": "proxy",
+            // Paste your client configuration，Need to keep "tag": "proxy",
         },
 ```
 
-替换为
+Replace with
 ```jsonc
         {
             "type": "socks",
@@ -85,4 +84,4 @@ systemctl disable --now hysteria && rm -f /usr/local/bin/hysteria /root/hysteria
         },
 ```
 
-2. v2rayN：服务器 ——> 添加自定义配置服务器 ——> 浏览 ——> 选择客户端配置 ——> Core类型 hysteria ——> Socks端口 0。
+2. v2rayN：server ——> Add a custom configuration server ——> browse ——> Select client configuration ——> Coretype hysteria ——> Socks port 0。
